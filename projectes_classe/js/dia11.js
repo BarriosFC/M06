@@ -40,14 +40,43 @@ function dias() {
 */
 function codigo() {
     let prompi = prompt("Ingrese un número");
+    let acum = 0;
+    let control = 1;
+    let lastDigit = parseInt(prompi[prompi.length-1]);
+    if (null == prompi) {
+        console.log('Número no válido');
+        return;
+    }
     if (prompi.length < 8 ) {
         prompi = prompi.padStart(8, '0');
+    } else if (prompi.length==8) {
+        //
     } else if (prompi.length<13) {
         prompi = prompi.padStart(13, '0');
+    } else if (prompi.length==13) {
+        //
     } else if (prompi.length>13) {
         console.log('Número no válido');
         return;
     }
  
-    //codigos
+    //codigos 
+    for (let i= prompi.length-2; i>=0; i--, control++) {
+        if (control % 2 == 1) {
+            acum += parseInt(prompi[i])*3;
+        } else {
+            acum += parseInt(prompi[i]);
+        }
+    }
+   
+    let check = acum % 10;
+    if (check == 0) {
+        check = 10;
+    }
+
+    if (10-check == lastDigit) {
+        console.log(`${prompi} -> es correcto`);
+    } else {
+        console.log(`${prompi} -> es incorrecto`);
+    }
 }
